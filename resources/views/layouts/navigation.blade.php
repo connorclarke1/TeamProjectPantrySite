@@ -14,10 +14,17 @@
                 
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('products')" :active="request()->routeIs('products')">
-                        {{ __('Products') }}
+                    <x-nav-link :href="route('inventory')" :active="request()->routeIs('inventory')">
+                        {{ __('Inventory') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('recipes')" :active="request()->routeIs('recipes')">
+                        {{ __('Recipes') }}
+                    </x-nav-link>
+                </div>
+
                 @can('isAdmin')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('create')" :active="request()->routeIs('create')">

@@ -16,22 +16,24 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return redirect('/products');
+    return redirect('/inventory');
 });
 
-Route::get('products', [ProductController::class, 'index'])->name('products');
+Route::get('inventory', [ProductController::class, 'index'])->name('inventory');
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('create');
 
-Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('edit');
+Route::get('/inventory/{id}/edit', [ProductController::class, 'edit'])->name('edit');
 
 
-Route::get('products/{id}', [ProductController::class, 'show']);
+Route::get('inventory/{id}', [ProductController::class, 'show']);
+
+Route::get('recipes', function (){ return view('recipes');}) -> name('recipes');
 
 
-Route::post('/products', [ProductController::class, 'store'])->name('store');
+Route::post('/inventory', [ProductController::class, 'store'])->name('store');
 
-Route::put('/products/{id}/edit', [ProductController::class, 'update'])->name('products.edit');
+Route::put('/inventory/{id}/edit', [ProductController::class, 'update'])->name('products.edit');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

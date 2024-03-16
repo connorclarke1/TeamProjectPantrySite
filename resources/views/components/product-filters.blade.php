@@ -1,5 +1,5 @@
 <div>
-    <form action="{{ route('products') }}" method="GET">
+    <form action="{{ route('inventory') }}" method="GET">
         <!-- Add your filtering options here -->
         <input type="text" name="search" placeholder="Search...">
         <select name="category">

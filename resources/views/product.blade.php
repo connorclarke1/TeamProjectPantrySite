@@ -7,7 +7,7 @@
     @foreach ($products as $product)
         <div class="w-1/4 p-4">
             @php
-                $hrefUrl = "/products/$product->id";
+                $hrefUrl = "/inventory/$product->id";
             @endphp
             @component('components.product-card', [
                 'product' => $product,

@@ -28,7 +28,7 @@
                 @can('isAdmin')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
-                        {{ __('Create Product') }}
+                        {{ __('Add Product') }}
                     </x-nav-link>
                 </div>
                 @endcan

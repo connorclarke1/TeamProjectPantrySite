@@ -26,11 +26,11 @@
             @endphp        
         @endif
             @component('components.product-card', [
-                'product'=>$product,
+                'product' => $product,
                 'id' => $product['id'],
                 'imageUrl' => asset('images/' . $product->image),
-                'title' => $product['title'],
-                'artist' => $product['artist'],
+                'product_name' => $product['product_name'],
+                'best_before' => $product['best_before'],
                 'price' => $product['price'],
                 'hrefUrl' => $hrefUrl,
                 'hrefText' => $hrefText,
@@ -69,11 +69,11 @@
             @endphp        
         @endif
             @component('components.product-card', [
-                'product'=>$product,
+                'product' => $product,
                 'id' => $product['id'],
                 'imageUrl' => asset('images/' . $product->image),
-                'title' => $product['title'],
-                'artist' => $product['artist'],
+                'product_name' => $product['product_name'],
+                'best_before' => $product['best_before'],
                 'price' => $product['price'],
                 'hrefUrl' => $hrefUrl,
                 'hrefText' => $hrefText,

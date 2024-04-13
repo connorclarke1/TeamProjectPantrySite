@@ -40,28 +40,20 @@
             @endcomponent
             
         </div>
+        @php
+            $productNutrition = $product->productNutrition;
+        @endphp
+        @component('components.nutrition-card' , [
+                'product' => $product,
+                'productNutrition' => $productNutrition,
+                'calories' => $productNutrition['calories'],
+                'protein' => $productNutrition['protein'],
+                'carbs' => $productNutrition['carbs'],
+                'fat' => $productNutrition['fat']
+                ])
+        @endcomponent
         
-        <div class="w-1/4 p-4">
-                <h2 style="font-weight: bold;">Nutritional Information</h2>
-                <table class="w-1/4 p-4">
-                    <tr>
-                        <td>Calories</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbs</td>
-                        <td>6g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>8g</td>
-                    </tr>
-                </table>
-        </div>
+        
         
 </div>
 

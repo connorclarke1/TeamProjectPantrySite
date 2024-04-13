@@ -38,4 +38,10 @@ class Product extends Model
         return $this->belongsTo(User::class, 'creator');
     }
 
+
+    public function productNutrition()
+    {
+        return $this->hasOne(ProductNutrition::class, 'productID');
+    }
+    
 }

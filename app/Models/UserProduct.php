@@ -5,18 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductNutrition extends Model
+class UserProduct extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'user_productID';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'calories',
-        'protein',
-        'fat',
-        'carbs'
+        'best_before'
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userID');
+    }
 
     public function product()
     {

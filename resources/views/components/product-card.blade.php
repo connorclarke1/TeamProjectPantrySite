@@ -1,14 +1,14 @@
 <div class="relative bg-gray-100 border border-gray-300 p-4 rounded-lg w-64">
     <div class="text-center mb-4">
         <h2 class="text-lg font-bold">{{ $product_name }}</h2>
-        <p class="text-sm italic text-gray-600">{{ $best_before }}</p>
+        <p class="text-sm italic text-gray-600">Best Before: {{ $best_before }}</p>
         
     </div>
     <div class="flex justify-center mb-4">
         <img src="{{ $imageUrl }}" alt="Product Image" class="max-w-full h-auto">
     </div>
     <div class="text-center">
-        <p class="font-semibold">{{ $price }}</p>
+        <p class="font-semibold">Stock: {{ $quantity }}</p>
     </div>
     
     <div class="absolute bottom-4 right-4">

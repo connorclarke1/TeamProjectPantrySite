@@ -16,6 +16,7 @@
                 'product_name' => $product['product_name'],
                 'best_before' => $product['best_before'],
                 'price' => $product['price'],
+                'quantity' => $product['quantity'],
                 'hrefUrl' => $hrefUrl,
                 'hrefText' => 'Select',
                 'hidden' => ''
@@ -55,6 +56,7 @@
                 'product_name' => $product['product_name'],
                 'best_before' => $product['best_before'],
                 'price' => $product['price'],
+                'quantity' => $product['quantity'],
                 'hrefUrl' => $hrefUrl,
                 'hrefText' => 'Select',
                 'hidden' => ''

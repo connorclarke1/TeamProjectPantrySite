@@ -13,20 +13,15 @@
     @method('PUT')    
         <input type="number" name="id" value="{{$product->id}}" hidden>
         <div class="p-2 m-2 rounded-lg shadow-lg bg-gray-50 border-2 border-blue-900 max-w-md">
-        <select name="category" required>
-            <option value="" disabled selected>Select Category</option>
-            <option value="CD">CD</option>
-            <option value="Book">Book</option>
-            <option value="Game">Game</option>
-        </select>
-            <div class="font-bold text-sm mb-2">Title</div>
+        
+            <div class="font-bold text-sm mb-2">Product Name</div>
             <div class="font-bold text-sm mb-2">
-                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="title" name="title" type="text" value="{{$product -> title}}">
+                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="product_name " name="product_name" type="text" value="{{$product -> product_name}}">
             </div>
-            <div class="font-bold text-sm mb-2">Artist</div>
+            <div class="font-bold text-sm mb-2">Best Before</div>
             <p class="text-gray-700 text-sm">
                 
-                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="artist" name="artist" type="text" value="{{$product -> artist}}">
+                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="best_before" name="best_before" type="date" value="{{$product -> best_before}}">
             </p>
             <div class="font-bold text-sm mb-2">Price in Pence</div>
             <p class="text-gray-500 text-base mt-2">
@@ -48,9 +43,10 @@
             'product' => $product,
             'id' => $product['id'],
             'imageUrl' => asset('images/' . $product->image),
-            'title' => $product['title'],
-            'artist' => $product['artist'],
+            'product_name' => $product['product_name'],
+            'best_before' => $product['best_before'],
             'price' => $product['price'],
+            'quantity' => $product['quantity'],
             'hrefUrl' => '',
             'hrefText' => '',
             'hidden' => 'hidden'

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\UserProduct;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
@@ -97,7 +98,14 @@ class ProductController extends Controller
     public function show(int $id)
     {
         $product = Product::find($id);
-        return view('selectedproduct', ['product' => $product]);
+        $query = UserProduct::query();
+
+        //product id is $id
+        $query -> where('productID', $id);
+
+        $UserProducts = $query->paginate(4);
+        return view('selectedproduct', compact('UserProducts', 'product'));
+        //return view('selectedproduct', ['product' => $product]);
     }
 
     /**

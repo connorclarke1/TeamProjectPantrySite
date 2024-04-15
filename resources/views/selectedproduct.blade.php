@@ -57,6 +57,18 @@
         
 </div>
 
+<div class="fixed inset-x-0 bottom-0 z-50 bg-white border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="py-3">
+            <div class="flex flex-wrap justify-center">
+                @foreach ($UserProducts as $UserProduct)
+
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 </x-app-layout>

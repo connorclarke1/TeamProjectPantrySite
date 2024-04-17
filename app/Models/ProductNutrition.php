@@ -12,6 +12,7 @@ class ProductNutrition extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'productID',
         'calories',
         'protein',
         'fat',

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class StoreProductRequest extends FormRequest
+class StoreProductNutritionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_name' => 'required|max:255',
-            //'artist' => 'required|max:255',
-            //'price' => 'required|numeric',
+            'calories' => 'required|numeric',
+            'protein' => 'required|numeric',
+            'fat' => 'required|numeric',
+            'carbs' => 'required|numeric',
         ];
     }
 }

@@ -10,28 +10,12 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
     protected $fillable = [
-        'artist',
-        'title',
-        'price',
-        'category'
-    ];
-    protected $casts = [
-        'category' => 'string'
+        'product_name',
+        'unit',
+        'price',     
     ];
 
-    public function getCategoryDisplayAttribute()
-    {
-        switch ($this->category) {
-            case 'CD':
-                return 'CD';
-            case 'Book':
-                return 'Book';
-            case 'Game':
-                return 'Game';
-            default:
-                return 'Category Error';
-        }
-    }
+
 
     public function creator()
     {

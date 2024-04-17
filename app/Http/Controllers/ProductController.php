@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\UserProduct;
+use App\Models\ProductNutrition;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
@@ -101,6 +102,15 @@ class ProductController extends Controller
         $product = Product::create($request->except('_token'));
         $product->creator = Auth::id();
 
+
+
+        //$product -> product_name = $product_name;
+        //$product -> calories = $calories;
+        //$product -> fat = $fat;
+        //$product -> carbs = $carbs;
+        //$product -> protein = $protein;
+        //$product -> unit = $unit;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -114,8 +124,13 @@ class ProductController extends Controller
             $product->image = '1704237336_download.jfif';
             $product->save();
         }
+
+        $productNutritionData = $request->except('_token');
+        $productNutritionData['productID'] = $product->id; // Set the product_id to the id of the newly created Product
+        $productNutrition = ProductNutrition::create($productNutritionData);
+
         $products = Product::all();
-        return Redirect::route('products'); 
+        return Redirect::route('inventory'); 
     }
 
     /**

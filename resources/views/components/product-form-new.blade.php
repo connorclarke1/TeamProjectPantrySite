@@ -8,13 +8,13 @@
         </ul>
     </div>
     @endif
-    <form method="POST" action="/products" enctype="multipart/form-data">
+    <form method="POST" action="/inventory" enctype="multipart/form-data">
     @csrf    
         <div class="p-2 m-2 rounded-lg shadow-lg bg-gray-50 border-2 border-blue-900 max-w-md">
         <h2> ADD NEW PRODUCT TO DATABASE </h2>
         <div class="font-bold text-sm mb-2">Product Name</div>
             <div class="font-bold text-sm mb-2">
-                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="product_name" name="product_name" type="text" placeholder="title">
+                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="product_name" name="product_name" type="text" placeholder="product name">
             </div>
 
             <div class="font-bold text-sm mb-2">Price per 100g</div>
@@ -40,7 +40,7 @@
             </p>   
             <div class="font-bold text-sm mb-2">Grams Per Unit</div>
             <p class="text-gray-500 text-base mt-2">
-                <input type="number"  step='1' value='0' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="gpu" name="gpu" type="text" placeholder="Grams Per Unit">
+                <input type="number"  step='1' value='0' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="unit" name="unit" type="text" placeholder="Grams Per Unit">
             </p> 
             <p>
             <div class="mb-4">

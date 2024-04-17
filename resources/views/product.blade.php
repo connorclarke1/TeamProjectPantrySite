@@ -14,7 +14,7 @@
                 'id' => $product['id'],
                 'imageUrl' => asset('images/' . $product->image),
                 'product_name' => $product['product_name'],
-                'best_before' => $product['best_before'],
+                'best_before' => $earliestBBF[$product['id']],
                 'price' => $product['price'],
                 'quantity' => $totalStocks[$product['id']],
                 'hrefUrl' => $hrefUrl,

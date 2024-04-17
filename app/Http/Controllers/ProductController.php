@@ -68,7 +68,17 @@ class ProductController extends Controller
         }
         //var_dump($totalStocks);
 
-        return view('product', compact('products', 'totalStocks'));
+        $earliestBBF = [];
+
+        foreach ($products as $product) {
+            $earliestBBFDate = UserProduct::where('productID', $product->id)
+            ->orderBy('best_before', 'asc')
+            ->value('best_before');
+
+            $earliestBBF[$product->id] = $earliestBBFDate;
+        }
+
+        return view('product', compact('products', 'totalStocks', 'earliestBBF'));
     }
 
     /**

@@ -32,7 +32,7 @@
                 'product_name' => $product['product_name'],
                 'best_before' => $product['best_before'],
                 'price' => $product['price'],
-                'quantity' => $product['quantity'],
+                'quantity' => $totalStock,
                 'hrefUrl' => $hrefUrl,
                 'hrefText' => $hrefText,
                 'hidden' => $hidden
@@ -75,7 +75,7 @@
                         'product_name' => $product['product_name'],
                         'best_before' => $UserProduct['best_before'],
                         'price' => $product['price'],
-                        'quantity' => $product['quantity'],
+                        'quantity' => $UserProduct['stock'],
                         'hrefUrl' => $hrefUrl,
                         'hrefText' => 'Select',
                         'hidden' => ''

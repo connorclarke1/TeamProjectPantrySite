@@ -66,9 +66,9 @@ class ProductController extends Controller
             $totalStock = UserProduct::where('productID', $product->id)->sum('stock');
             $totalStocks[$product->id] = $totalStock;
         }
-        var_dump($totalStock);
+        //var_dump($totalStocks);
 
-        return view('product', compact('products'));
+        return view('product', compact('products', 'totalStocks'));
     }
 
     /**
@@ -121,10 +121,11 @@ class ProductController extends Controller
 
         $UserProducts = $query->paginate(4);
         $productInstances = $UserProducts->items();
+        $totalStock = $query->sum('stock');
         //var_dump($product);
         //var_dump($UserProducts);
         //dd($products);
-        return view('selectedproduct', compact('productInstances', 'product'));
+        return view('selectedproduct', compact('productInstances', 'product', 'totalStock'));
         //return view('selectedproduct', ['product' => $product]);
     }
 

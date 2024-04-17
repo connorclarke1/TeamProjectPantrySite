@@ -16,7 +16,7 @@
                 'product_name' => $product['product_name'],
                 'best_before' => $product['best_before'],
                 'price' => $product['price'],
-                'quantity' => $product['quantity'],
+                'quantity' => $totalStocks[$product['id']],
                 'hrefUrl' => $hrefUrl,
                 'hrefText' => 'Select',
                 'hidden' => ''

@@ -104,7 +104,11 @@ class ProductController extends Controller
         $query -> where('productID', $id);
 
         $UserProducts = $query->paginate(4);
-        return view('selectedproduct', compact('UserProducts', 'product'));
+        $productInstances = $UserProducts->items();
+        //var_dump($product);
+        //var_dump($UserProducts);
+        //dd($products);
+        return view('selectedproduct', compact('productInstances', 'product'));
         //return view('selectedproduct', ['product' => $product]);
     }
 

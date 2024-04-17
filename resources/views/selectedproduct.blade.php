@@ -61,8 +61,28 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="py-3">
             <div class="flex flex-wrap justify-center">
-                @foreach ($UserProducts as $UserProduct)
-
+            
+           
+                @foreach ($productInstances as $UserProduct)
+                    <div class="w-1/4 p-4">
+                    @php
+                        $hrefUrl = "/inventory/$product->id";
+                    @endphp
+                    @component('components.product-card', [
+                        'product' => $product,
+                        'id' => $product['id'],
+                        'imageUrl' => asset('images/' . $product->image),
+                        'product_name' => $product['product_name'],
+                        'best_before' => $UserProduct['best_before'],
+                        'price' => $product['price'],
+                        'quantity' => $product['quantity'],
+                        'hrefUrl' => $hrefUrl,
+                        'hrefText' => 'Select',
+                        'hidden' => ''
+                        ])
+                    @endcomponent
+            
+                    </div>
                 @endforeach
             </div>
         </div>

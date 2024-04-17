@@ -16,7 +16,8 @@ class UserProduct extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'best_before'
+        'best_before',
+        'stock'
     ];
 
 

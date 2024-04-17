@@ -51,7 +51,23 @@ class ProductController extends Controller
             $query->latest();
         }
 
+        //TODO add stock total sql query
+        
+        
+        //TODO add closest bbf date query
+
+
         $products = $query->paginate(8);
+
+        //TODO for each product do sql query on total stock
+        $totalStocks = [];
+
+        foreach($products as $product){
+            $totalStock = UserProduct::where('productID', $product->id)->sum('stock');
+            $totalStocks[$product->id] = $totalStock;
+        }
+        var_dump($totalStock);
+
         return view('product', compact('products'));
     }
 

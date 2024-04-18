@@ -33,6 +33,8 @@ Route::get('recipes', function (){ return view('recipes');}) -> name('recipes');
 
 Route::post('/inventory', [ProductController::class, 'store'])->name('store');
 
+Route::post('/inventoryInstance', [ProductController::class, 'storeInstance'])->name('storeInstance');
+
 Route::put('/inventory/{id}/edit', [ProductController::class, 'update'])->name('products.edit');
 
 Route::get('/dashboard', function () {

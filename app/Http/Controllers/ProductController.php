@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\StoreUserProductRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
@@ -90,7 +91,9 @@ class ProductController extends Controller
         if (!auth()->user()->can('isAdmin')) {
             abort(403, 'Unauthorized action.');
         }
-        return view('add-product-form'); 
+        $productNames = Product::pluck('product_name', 'id');
+        //dd($productNames);
+        return view('add-product-form', compact('productNames')); 
     }
 
     /**
@@ -130,6 +133,25 @@ class ProductController extends Controller
         $productNutrition = ProductNutrition::create($productNutritionData);
 
         $products = Product::all();
+        return Redirect::route('inventory'); 
+    }
+
+
+    public function storeInstance(StoreUserProductRequest $request)
+    {
+
+        $data = $request->except('_token');
+  
+        $UserProductData = [
+            'userID' => Auth::id(),
+            'stock' => $data['stock'],
+            'best_before' => $data['best_before'],
+            'productID' => intval($data['product_name']),
+            //using dd($data) shows the productID is passed as product_name and is an int, easier to just change here
+        ];
+        
+        $productInstance = UserProduct::create($UserProductData);
+
         return Redirect::route('inventory'); 
     }
 

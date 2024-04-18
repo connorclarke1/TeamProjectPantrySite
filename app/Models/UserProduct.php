@@ -17,7 +17,9 @@ class UserProduct extends Model
 
     protected $fillable = [
         'best_before',
-        'stock'
+        'stock',
+        'userID',
+        'productID'
     ];
 
 

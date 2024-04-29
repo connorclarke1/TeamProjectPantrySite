@@ -37,6 +37,8 @@ Route::post('/inventory', [ProductController::class, 'store'])->name('store');
 
 Route::post('/inventoryInstance', [ProductController::class, 'storeInstance'])->name('storeInstance');
 
+Route::post('/barcode', [ProductController::class, 'findBarcode']) -> name('findBarcode');
+
 Route::put('/inventory/{id}/edit', [ProductController::class, 'update'])->name('products.edit');
 
 Route::get('/dashboard', function () {

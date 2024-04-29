@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\StoreUserProductRequest;
+use App\Http\Requests\FindBarcodeRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
@@ -224,5 +225,28 @@ class ProductController extends Controller
         $product->delete();
         $products = Product::all();
         return Redirect::route('products'); 
+    }
+
+    public function findBarcode(FindBarcodeRequest $request)
+    {
+        $image = $request->file('image');
+        if ($image) {
+            $image->move(public_path('uploads'), $image->getClientOriginalName());
+
+            
+            $imagePath = public_path('uploads') . '/' . $image->getClientOriginalName();
+        }
+        $result = shell_exec("py \"C:\\Users\\Connor\\Desktop\\Team Project\\Barcode Scanning\\BarcodeScan.py\" ". escapeshellarg($imagePath));
+        $resultArray = explode("\n", trim($result));
+        
+        if ($resultArray[0] == "Success"){
+            $barcodeType = $resultArray[1];
+            $barcodeNum = $resultArray[2];
+        }
+        else {
+            //TODO add error handling here, resultArray[1] will be error info
+        }
+
+        dd($barcodeNum);
     }
 }

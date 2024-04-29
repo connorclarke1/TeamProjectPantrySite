@@ -8,7 +8,7 @@
         </ul>
     </div>
     @endif
-    <form method="POST" action="/products" enctype="multipart/form-data">
+    <form method="POST" action="/barcode" enctype="multipart/form-data">
     @csrf    
         <div class="p-2 m-2 rounded-lg shadow-lg bg-gray-50 border-2 border-blue-900 max-w-md">  
             <p>

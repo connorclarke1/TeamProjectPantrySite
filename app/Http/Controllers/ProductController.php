@@ -242,11 +242,40 @@ class ProductController extends Controller
         if ($resultArray[0] == "Success"){
             $barcodeType = $resultArray[1];
             $barcodeNum = $resultArray[2];
+            $product_name = $resultArray[3];
+            $image_url = $resultArray[4];
+            $calories = $resultArray[5];
+            $protein = $resultArray[6];
+            $carbs = $resultArray[7];
+            $fat = $resultArray[8];
+            //TODO add if not = None, as can be none
         }
         else {
             //TODO add error handling here, resultArray[1] will be error info
+            //TODO add redirect here so further code is not executed
         }
 
-        dd($barcodeNum);
+        $productData = [
+            'barcode' => $barcodeNum,
+            'barcodeType' => $barcodeType,
+            'product_name' => $product_name,
+            'image_url' => $image_url,
+            'calories' => $calories,
+            'protein' => $protein,
+            'carbs' => $carbs,
+            'fat' => $fat, 
+        ];
+
+        //TODO check if barcode exists in db (this user only)
+            //TODO if it does add all known data
+        
+        //TODO if not existing
+            //TODO add info
+            //Scrape from online?? if time allows
+        
+        //TODO redirect to form, send all data possible , $productData
+        
+        return view('barcode-product-creation', compact('productData'));
+        //dd($barcodeNum);
     }
 }

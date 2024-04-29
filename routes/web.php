@@ -30,6 +30,8 @@ Route::get('inventory/{id}', [ProductController::class, 'show']);
 
 Route::get('recipes', function (){ return view('recipes');}) -> name('recipes');
 
+Route::get('barcode', function (){ return view('barcode');}) -> name('barcode');
+
 
 Route::post('/inventory', [ProductController::class, 'store'])->name('store');
 

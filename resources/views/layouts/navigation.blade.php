@@ -25,6 +25,12 @@
                     </x-nav-link>
                 </div>
 
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('barcode')" :active="request()->routeIs('barcode')">
+                        {{ __('Scan Barcode') }}
+                    </x-nav-link>
+                </div>
+
                 @can('isAdmin')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('create')" :active="request()->routeIs('create')">

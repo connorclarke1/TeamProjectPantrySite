@@ -9,6 +9,8 @@ class ProductNutrition extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'product_nutritionID';
+
     public $timestamps = false;
 
     protected $fillable = [

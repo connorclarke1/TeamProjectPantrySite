@@ -218,7 +218,8 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
-
+        $productNutrition = $product->productNutrition;
+        
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -228,11 +229,13 @@ class ProductController extends Controller
             $product->image = $imageName;
         }
 
+        $productNutrition->fill($request->except('_token'));
+        $productNutrition->save();
         $product->fill($request->except('_token'));
         $product->save();
         $products = Product::all();
  
-        return Redirect::route('products'); 
+        return Redirect::route('inventory'); 
     }
 
     /**

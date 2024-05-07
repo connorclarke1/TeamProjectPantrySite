@@ -60,7 +60,7 @@ class ProductController extends Controller
         //TODO add closest bbf date query
 
 
-        $products = $query->paginate(8);
+        $products = $query->paginate(16);
         //$products = $query;
         
        

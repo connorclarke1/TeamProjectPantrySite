@@ -5,7 +5,7 @@
         
     </div>
     <div class="flex justify-center mb-4">
-        <img src="{{ $imageUrl }}" alt="Product Image" class="max-w-full h-auto">
+        <img src="{{ $imageUrl }}" alt="Product Image" class="max-w-full max-h-32">
     </div>
     <div class="text-center">
         <p class="font-semibold">Stock: {{ $quantity }}</p>

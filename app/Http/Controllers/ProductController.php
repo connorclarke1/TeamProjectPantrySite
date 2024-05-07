@@ -13,6 +13,7 @@ use App\Http\Requests\StoreUserProductRequest;
 use App\Http\Requests\FindBarcodeRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -133,7 +134,15 @@ class ProductController extends Controller
             $product->save();
         }
         else{
-            $product->image = '1704237336_download.jfif';
+            $image_url = $request->input('pulledImage');
+            $image_contents = file_get_contents($image_url);
+            $filename = time() . '_' . basename($image_url);
+            //Storage::disk('public')->put('images/' . $filename, $image_contents);
+
+            $path = public_path('images/' . $filename);
+            file_put_contents($path, $image_contents);
+
+            $product->image = $filename;
             $product->save();
         }
 

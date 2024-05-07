@@ -50,12 +50,13 @@
             <p>
             <div class="mb-4">
             <label for="image" class="block text-sm font-medium text-gray-700">Upload Product Photo</label>
-                <input id="image" name="image" type="file" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <input id="image" name="image" type="file" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md ">
             </div>
             </p>
             <div class="flex items-center justify-end mt-4 top-auto">
                 <button type="submit" class="bg-gray-800 text-white text-xs px-2 py-2 rounded-md mb-2 mr-2 uppercase hover:underline">Add New</button>
             </div>
+            <input id="pulledImage" name="pulledImage" type="text" value="{{ $productData['image_url'] }}" hidden>
        </div>
     </form>
     </div>

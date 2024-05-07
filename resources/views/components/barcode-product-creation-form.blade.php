@@ -22,7 +22,7 @@
                 <input type="number" value="{{ $productData['barcode'] }}" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="barcode" name="barcode" type="text" placeholder="{{ $productData['barcode'] }}">
             </p>  
 
-            <div class="font-bold text-sm mb-2">Price per 100g</div>
+            <div class="font-bold text-sm mb-2">Price per Unit or 100g in Pence</div>
             <p class="text-gray-500 text-base mt-2">
                 <input type="number"  step='1' value='0' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="price" name="price" type="text" placeholder="price">
             </p>  
@@ -43,11 +43,8 @@
             <p class="text-gray-500 text-base mt-2">
                 <input type="number"  step='1' value="{{$productData['fat']}}" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="fat" name="fat" type="text" placeholder="{{$productData['fat']}}">
             </p>   
-            <div class="font-bold text-sm mb-2">Grams Per Unit</div>
-            <p class="text-gray-500 text-base mt-2">
-                <input type="number"  step='1' value='0' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="unit" name="unit" type="text" placeholder="Grams Per Unit">
-            </p> 
-            <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="stockMeasure" name="stockMeasure" placeholder="Units">
+            <div class="font-bold text-sm mb-2">Stock Measured In</div>
+            <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="unit" name="unit" placeholder="Units">
                 <option value="Units">Units</option>
                 <option value="Grams">Grams</option>
             </select>

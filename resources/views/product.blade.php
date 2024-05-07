@@ -18,6 +18,7 @@
                 'price' => $product['price'],
                 'quantity' => $totalStocks[$product['id']],
                 'hrefUrl' => $hrefUrl,
+                'stockMeasure' => $product['unit'],
                 'hrefText' => 'Select',
                 'hidden' => ''
             ])

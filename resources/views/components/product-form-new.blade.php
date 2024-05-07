@@ -43,9 +43,9 @@
                 <input type="number"  step='1' value='0' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="unit" name="unit" type="text" placeholder="Grams Per Unit">
             </p> 
             <div class="font-bold text-sm mb-2">Stock Measured In</div>
-            <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="stockMeasure" name="stockMeasure" placeholder="units">
-                <option value="units">Units</option>
-                <option value="grams">Grams</option>
+            <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="stockMeasure" name="stockMeasure" placeholder="Units">
+                <option value="Units">Units</option>
+                <option value="Grams">Grams</option>
             </select>
             <p>
             <div class="mb-4">

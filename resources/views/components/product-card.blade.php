@@ -7,8 +7,8 @@
     <div class="flex justify-center mb-4">
         <img src="{{ $imageUrl }}" alt="Product Image" class="max-w-full max-h-32">
     </div>
-    <div class="text-center">
-        <p class="font-semibold">Stock: {{ $quantity }}</p>
+    <div class="text-center mb-8">
+        <p class="font-semibold">Stock: {{ $quantity }} {{$stockMeasure}}</p>
     </div>
     
     <div class="absolute bottom-4 right-4">

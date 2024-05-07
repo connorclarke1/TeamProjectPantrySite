@@ -49,6 +49,7 @@
             'quantity' => $product['quantity'],
             'hrefUrl' => '',
             'hrefText' => '',
+            'stockMeasure' => $product['unit'],
             'hidden' => 'hidden'
         ])
         @endcomponent

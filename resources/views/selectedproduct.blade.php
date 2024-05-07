@@ -34,6 +34,7 @@
                 'price' => $product['price'],
                 'quantity' => $totalStock,
                 'hrefUrl' => $hrefUrl,
+                'stockMeasure' => $product['unit'],
                 'hrefText' => $hrefText,
                 'hidden' => $hidden
             ])
@@ -77,6 +78,7 @@
                         'price' => $product['price'],
                         'quantity' => $UserProduct['stock'],
                         'hrefUrl' => $hrefUrl,
+                        'stockMeasure' => $product['unit'],
                         'hrefText' => 'Select',
                         'hidden' => ''
                         ])
@@ -129,6 +131,7 @@
                 'quantity' => $product['quantity'],
                 'hrefUrl' => $hrefUrl,
                 'hrefText' => $hrefText,
+                'stockMeasure' => $product['unit'],
                 'hidden' => $hidden
             ])
             @endcomponent

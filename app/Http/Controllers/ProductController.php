@@ -204,7 +204,9 @@ class ProductController extends Controller
         }
         try {
             $product = Product::findOrFail($id);
-            return view('edit-product-form' , ['product' => $product]);
+            $productNutrition = $product->productNutrition;
+            //return view('edit-product-form' , ['product' => $product]);
+            return view('edit-product-form' , compact('product', 'productNutrition'));
         } catch (\Exception $e) {
             dd($e->getMessage());
         }

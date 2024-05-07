@@ -54,13 +54,15 @@ class ProductController extends Controller
             $query->latest();
         }
 
-        //TODO add stock total sql query
-        
+        $query->whereHas('userProducts');
         
         //TODO add closest bbf date query
 
 
         $products = $query->paginate(8);
+        //$products = $query;
+        
+       
 
         //TODO for each product do sql query on total stock
         $totalStocks = [];
@@ -69,7 +71,11 @@ class ProductController extends Controller
             $totalStock = UserProduct::where('productID', $product->id)->sum('stock');
             $totalStocks[$product->id] = $totalStock;
         }
-        //var_dump($totalStocks);
+        //TODO filter products so stock > 0 only shown
+        //$inStockProducts = [];
+        $inStockProducts = collect([]);
+
+
 
         $earliestBBF = [];
 
@@ -80,6 +86,8 @@ class ProductController extends Controller
 
             $earliestBBF[$product->id] = $earliestBBFDate;
         }
+
+        //$products->paginate(8);
 
         return view('product', compact('products', 'totalStocks', 'earliestBBF'));
     }

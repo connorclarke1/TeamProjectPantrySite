@@ -27,5 +27,10 @@ class Product extends Model
     {
         return $this->hasOne(ProductNutrition::class, 'productID');
     }
+
+    public function userProducts()
+{
+    return $this->hasMany(UserProduct::class, 'productID');
+}
     
 }

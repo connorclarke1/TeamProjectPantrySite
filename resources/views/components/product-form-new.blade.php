@@ -42,11 +42,17 @@
             <p class="text-gray-500 text-base mt-2">
                 <input type="number"  step='1' value='0' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="unit" name="unit" type="text" placeholder="Grams Per Unit">
             </p> 
+            <div class="font-bold text-sm mb-2">Stock Measured In</div>
+            <select class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="stockMeasure" name="stockMeasure" placeholder="units">
+                <option value="units">Units</option>
+                <option value="grams">Grams</option>
+            </select>
             <p>
             <div class="mb-4">
             <label for="image" class="block text-sm font-medium text-gray-700">Upload Product Photo</label>
                 <input id="image" name="image" type="file" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
             </div>
+            <input id="pulledImage" name="pulledImage" type="text" value="https://www.mothertech.co.uk/wp-content/plugins/wp-media-folder/assets/images/default.png" hidden>
             </p>
             <div class="flex items-center justify-end mt-4 top-auto">
                 <button type="submit" class="bg-gray-800 text-white text-xs px-2 py-2 rounded-md mb-2 mr-2 uppercase hover:underline">Add New</button>

@@ -162,7 +162,7 @@ class ProductController extends Controller
             'stock' => $data['stock'],
             'best_before' => $data['best_before'],
             'productID' => intval($data['product_name']),
-            //using dd($data) shows the productID is passed as product_name and is an int, easier to just change here
+            
         ];
         
         $productInstance = UserProduct::create($UserProductData);
@@ -178,17 +178,13 @@ class ProductController extends Controller
         $product = Product::find($id);
         $query = UserProduct::query();
 
-        //product id is $id
         $query -> where('productID', $id);
 
         $UserProducts = $query->paginate(4);
         $productInstances = $UserProducts->items();
         $totalStock = $query->sum('stock');
-        //var_dump($product);
-        //var_dump($UserProducts);
-        //dd($products);
+
         return view('selectedproduct', compact('productInstances', 'product', 'totalStock'));
-        //return view('selectedproduct', ['product' => $product]);
     }
 
     /**

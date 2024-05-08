@@ -1,5 +1,5 @@
 @can('loggedIn')
-    <x-app-layout>
+<x-app-layout>
 <x-product-filters />
 <h2>Full List of Products</h2>
 <table>
@@ -22,22 +22,14 @@
                 'hrefText' => 'Select',
                 'hidden' => ''
             ])
-            @endcomponent
-            
+            @endcomponent           
         </div>
     @endforeach
 </div>
     <div class="mt-4">
-        
-    <!-- Display products -->
-    <!-- ... -->
-
-    <!-- Pagination links -->
-            {{ $products->links() }}
-        
+            {{ $products->links() }}       
     </div>
     </x-app-layout>
-
 @else
 
 <x-guest-layout>

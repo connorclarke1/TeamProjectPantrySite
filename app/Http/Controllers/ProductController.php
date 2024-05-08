@@ -28,12 +28,11 @@ class ProductController extends Controller
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
-                $q->where('title', 'like', "%$search%")
-                    ->orWhere('artist', 'like', "%$search%");
+                $q->where('product_name', 'like', "%$search%");
             });
         }
-        if ($request->filled('category')) {
-            $query->where('category', $request->category);
+        if ($request->filled('units')) {
+            $query->where('unit', $request->units);
         }
 
         if ($request->filled('price_range')) {
@@ -45,9 +44,11 @@ class ProductController extends Controller
             $order_by = $request->order_by;
             list($sortField, $sortDirection) = explode('_', $order_by);
 
-            $allowedFields = ['title', 'artist', 'price'];
+            $allowedFields = ['productName', 'price'];
+
             $allowedDirections = ['asc', 'desc'];
             if (in_array($sortField, $allowedFields) && in_array($sortDirection, $allowedDirections)) {
+                if ($sortField == 'productName'){ $sortField = 'product_name';}
                 $query->orderBy($sortField, $sortDirection);
             } else {
             }
@@ -58,23 +59,18 @@ class ProductController extends Controller
 
         $query->whereHas('userProducts');
         
-        //TODO add closest bbf date query
-
-
-        $products = $query->paginate(16);
-        //$products = $query;
         
-       
 
-        //TODO for each product do sql query on total stock
+
+        $products = $query->paginate(8);
+
         $totalStocks = [];
 
         foreach($products as $product){
             $totalStock = UserProduct::where('productID', $product->id)->sum('stock');
             $totalStocks[$product->id] = $totalStock;
         }
-        //TODO filter products so stock > 0 only shown
-        //$inStockProducts = [];
+        
         $inStockProducts = collect([]);
 
 

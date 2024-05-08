@@ -11,6 +11,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\StoreUserProductRequest;
 use App\Http\Requests\FindBarcodeRequest;
+use App\Http\Requests\UpdateInstanceRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -238,15 +239,61 @@ class ProductController extends Controller
         return Redirect::route('inventory'); 
     }
 
+    public function editInstance($user_productID)
+    {
+        if (!auth()->user()->can('isAdmin')) {
+            abort(403, 'Unauthorized action.');
+        }
+        try {
+            $UserProduct = UserProduct::findOrFail($user_productID);
+            $product = $UserProduct->product;
+            $productNutrition = $product->productNutrition;
+            //return view('edit-product-form' , ['product' => $product]);
+            return view('edit-product-instance' , compact('product', 'productNutrition', 'UserProduct'));
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function updateInstance(UpdateInstanceRequest $request ,$user_productID)
+    {
+        
+        $UserProduct = UserProduct::findOrFail($user_productID);
+        $product = $UserProduct->product;
+        $id = $product['id'];
+        $UserProduct->fill($request->except('_token'));
+        $UserProduct->save();
+ 
+        return Redirect::route('inventory', ['id' => $id]);
+        
+        
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+        
+        $userProducts = UserProduct::where('user_productID', $id)->delete();
         $product->delete();
         $products = Product::all();
-        return Redirect::route('products'); 
+        //TODO delete all instances in UserProduct
+        
+
+
+        return Redirect::route('inventory'); 
+    }
+
+    public function destroyInstance($user_productID)
+    {
+        $UserProduct = UserProduct::findOrFail($user_productID);
+        $product = $UserProduct->product;
+        $id = $product['id'];
+        $UserProduct->delete();
+        
+        return Redirect::route('inventory', ['id' => $id]);
     }
 
     public function findBarcode(FindBarcodeRequest $request)

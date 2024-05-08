@@ -28,6 +28,8 @@ Route::get('/inventory/{id}/edit', [ProductController::class, 'edit'])->name('ed
 
 Route::get('inventory/{id}', [ProductController::class, 'show']);
 
+Route::get('inventoryUpdate/{user_productID}', [ProductController::class, 'editInstance']);
+
 Route::get('recipes', function (){ return view('recipes');}) -> name('recipes');
 
 Route::get('barcode', function (){ return view('barcode');}) -> name('barcode');
@@ -41,14 +43,17 @@ Route::post('/barcode', [ProductController::class, 'findBarcode']) -> name('find
 
 Route::put('/inventory/{id}/edit', [ProductController::class, 'update'])->name('products.edit');
 
+Route::put('/inventoryUpdate/{user_productID}', [ProductController::class, 'updateInstance'])->name('products.updateInstance');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+
+Route::delete('/inventoryUpdate/{user_productID}', [ProductController::class, 'destroyInstance'])->name('products.destroyInstance');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

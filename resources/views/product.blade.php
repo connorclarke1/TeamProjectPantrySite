@@ -58,6 +58,7 @@
                 'best_before' => $product['best_before'],
                 'price' => $product['price'],
                 'quantity' => $product['quantity'],
+                'stockMeasure' => $product['unit'],
                 'hrefUrl' => $hrefUrl,
                 'hrefText' => 'Select',
                 'hidden' => ''

@@ -67,7 +67,7 @@
                 @foreach ($productInstances as $UserProduct)
                     <div class="w-1/4 p-4">
                     @php
-                        $hrefUrl = "/inventory/$product->id";
+                        $hrefUrl = "/inventoryUpdate/$UserProduct->user_productID";
                     @endphp
                     @component('components.product-card', [
                         'product' => $product,
@@ -79,7 +79,7 @@
                         'quantity' => $UserProduct['stock'],
                         'hrefUrl' => $hrefUrl,
                         'stockMeasure' => $product['unit'],
-                        'hrefText' => 'Select',
+                        'hrefText' => 'Update Stock',
                         'hidden' => ''
                         ])
                     @endcomponent

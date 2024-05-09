@@ -19,10 +19,11 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Displays a list of products - filters applied using query - gathers total stock of products for product cards
      */
     public function index(Request $request)
     {
+        //If statements stack to create one big SQL query
         $query = Product::query();
 
         if ($request->filled('search')) {
@@ -64,6 +65,8 @@ class ProductController extends Controller
 
         $products = $query->paginate(8);
 
+
+        //Iterate over each instance of userproduct to gather total stock count for inventory view
         $totalStocks = [];
 
         foreach($products as $product){
@@ -74,7 +77,7 @@ class ProductController extends Controller
         $inStockProducts = collect([]);
 
 
-
+        //Iterate over each instance of userproduct to retreive the earliest bbf date to display
         $earliestBBF = [];
 
         foreach ($products as $product) {
@@ -84,8 +87,6 @@ class ProductController extends Controller
 
             $earliestBBF[$product->id] = $earliestBBFDate;
         }
-
-        //$products->paginate(8);
 
         return view('product', compact('products', 'totalStocks', 'earliestBBF'));
     }
@@ -104,7 +105,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage. StoreProductRequest has defined requirements
      */
     public function store(StoreProductRequest $request)
     {
@@ -112,17 +113,10 @@ class ProductController extends Controller
         $product = Product::create($request->except('_token'));
         $product->creator = Auth::id();
 
-
-
-        //$product -> product_name = $product_name;
-        //$product -> calories = $calories;
-        //$product -> fat = $fat;
-        //$product -> carbs = $carbs;
-        //$product -> protein = $protein;
-        //$product -> unit = $unit;
-
+        //If image uploaded , set
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+            //Time used for unique names
             $imageName = time() . '_' . $image->getClientOriginalName();
     
             $image->move(public_path('images'), $imageName);
@@ -131,10 +125,10 @@ class ProductController extends Controller
             $product->save();
         }
         else{
+            //If no image - use default image
             $image_url = $request->input('pulledImage');
             $image_contents = file_get_contents($image_url);
             $filename = time() . '_' . basename($image_url);
-            //Storage::disk('public')->put('images/' . $filename, $image_contents);
 
             $path = public_path('images/' . $filename);
             file_put_contents($path, $image_contents);
@@ -142,16 +136,16 @@ class ProductController extends Controller
             $product->image = $filename;
             $product->save();
         }
-
+        //Add entry to product_nutrition table along with nutritional data
         $productNutritionData = $request->except('_token');
-        $productNutritionData['productID'] = $product->id; // Set the product_id to the id of the newly created Product
+        $productNutritionData['productID'] = $product->id; 
         $productNutrition = ProductNutrition::create($productNutritionData);
 
         $products = Product::all();
         return Redirect::route('inventory'); 
     }
 
-
+    //Store instance of product, StoreUserProductRequest has defined requirements
     public function storeInstance(StoreUserProductRequest $request)
     {
 
@@ -171,24 +165,25 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the selected product page and instances below.
      */
     public function show(int $id)
     {
         $product = Product::find($id);
         $query = UserProduct::query();
-
+        //Find all instances of products using productID
         $query -> where('productID', $id);
 
         $UserProducts = $query->paginate(4);
         $productInstances = $UserProducts->items();
+        //Total stock count
         $totalStock = $query->sum('stock');
 
         return view('selectedproduct', compact('productInstances', 'product', 'totalStock'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing a product, also show nutritional info
      */
     public function edit(int $id)
     {
@@ -197,8 +192,8 @@ class ProductController extends Controller
         }
         try {
             $product = Product::findOrFail($id);
+            //Use relationship defined in model to get productNutrition, since product nutrition belongs to product
             $productNutrition = $product->productNutrition;
-            //return view('edit-product-form' , ['product' => $product]);
             return view('edit-product-form' , compact('product', 'productNutrition'));
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -206,13 +201,14 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the products info, UpdateProductRequest has defined requirements
      */
     public function update(UpdateProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
         $productNutrition = $product->productNutrition;
         
+        //If image is uploaded change, if no it will be left the same
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -221,7 +217,7 @@ class ProductController extends Controller
     
             $product->image = $imageName;
         }
-
+        //Enter new data into tables
         $productNutrition->fill($request->except('_token'));
         $productNutrition->save();
         $product->fill($request->except('_token'));
@@ -231,6 +227,7 @@ class ProductController extends Controller
         return Redirect::route('inventory'); 
     }
 
+    //Load the edit instance page
     public function editInstance($user_productID)
     {
         if (!auth()->user()->can('isAdmin')) {
@@ -238,15 +235,17 @@ class ProductController extends Controller
         }
         try {
             $UserProduct = UserProduct::findOrFail($user_productID);
+            //HasOne relationship in model used to get product
             $product = $UserProduct->product;
+            //BelongsTo relationship used
             $productNutrition = $product->productNutrition;
-            //return view('edit-product-form' , ['product' => $product]);
             return view('edit-product-instance' , compact('product', 'productNutrition', 'UserProduct'));
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
     }
 
+    //Update the product instance, UpdateInstanceRequest has defined requirements
     public function updateInstance(UpdateInstanceRequest $request ,$user_productID)
     {
         
@@ -255,6 +254,8 @@ class ProductController extends Controller
         $id = $product['id'];
         $UserProduct->fill($request->except('_token'));
         $UserProduct->save();
+
+        //Product instance Updated, returned to view of selected product using ID
  
         return Redirect::route('inventory', ['id' => $id]);
         
@@ -262,7 +263,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the product from storage. Also delete all product instances
      */
     public function destroy($id)
     {
@@ -271,23 +272,23 @@ class ProductController extends Controller
         $userProducts = UserProduct::where('user_productID', $id)->delete();
         $product->delete();
         $products = Product::all();
-        //TODO delete all instances in UserProduct
         
-
-
         return Redirect::route('inventory'); 
     }
 
+    //Delete an instance of the product
     public function destroyInstance($user_productID)
     {
         $UserProduct = UserProduct::findOrFail($user_productID);
         $product = $UserProduct->product;
         $id = $product['id'];
         $UserProduct->delete();
-        
+        //Returns view of product
         return Redirect::route('inventory', ['id' => $id]);
     }
 
+
+    //Form submittion of barcode - executes python script which returns information about product
     public function findBarcode(FindBarcodeRequest $request)
     {
         $image = $request->file('image');
@@ -297,6 +298,9 @@ class ProductController extends Controller
             
             $imagePath = public_path('uploads') . '/' . $image->getClientOriginalName();
         }
+        //Get image from above and execute python script in order to get info about product
+        //Python script uses library to read barcode, the api to get info 
+        //Returns array of data
         $result = shell_exec("py \"C:\\Users\\Connor\\Desktop\\Team Project\\Barcode Scanning\\BarcodeScan.py\" ". escapeshellarg($imagePath));
         $resultArray = explode("\n", trim($result));
         
@@ -309,13 +313,12 @@ class ProductController extends Controller
             $protein = $resultArray[6];
             $carbs = $resultArray[7];
             $fat = $resultArray[8];
-            //TODO add if not = None, as can be none
+            
         }
         else {
-            //TODO add error handling here, resultArray[1] will be error info
-            //TODO add redirect here so further code is not executed
+            
         }
-
+        //Data to be fed to creating product form then displayed
         $productData = [
             'barcode' => $barcodeNum,
             'barcodeType' => $barcodeType,
@@ -327,16 +330,9 @@ class ProductController extends Controller
             'fat' => $fat, 
         ];
 
-        //TODO check if barcode exists in db (this user only)
-            //TODO if it does add all known data
-        
-        //TODO if not existing
-            //TODO add info
-            //Scrape from online?? if time allows
-        
-        //TODO redirect to form, send all data possible , $productData
+        //Create the view for the new product form, view is fed data from barcode scanning to be entered already
         
         return view('barcode-product-creation', compact('productData'));
-        //dd($barcodeNum);
+        
     }
 }

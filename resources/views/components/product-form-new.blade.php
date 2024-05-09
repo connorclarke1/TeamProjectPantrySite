@@ -32,7 +32,7 @@
             </p>  
             <div class="font-bold text-sm mb-2">Carbs / 100g</div>
             <p class="text-gray-500 text-base mt-2">
-                <input type="number"  step='1' value='0' class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="carbs" name="carbs" type="text" placeholder="carbs">
+                <input type="number"  step='1' value='0' id="carbs" name="carbs" type="text" placeholder="carbs" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" >
             </p>  
             <div class="font-bold text-sm mb-2">Fat / 100g</div>
             <p class="text-gray-500 text-base mt-2">

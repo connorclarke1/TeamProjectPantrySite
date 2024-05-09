@@ -25,9 +25,6 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'product_name' => 'required|max:255',
-            //'image_url' => 'required'
-            //'artist' => 'required|max:255',
-            //'price' => 'required|numeric',
         ];
     }
 }

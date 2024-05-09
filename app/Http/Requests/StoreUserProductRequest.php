@@ -26,8 +26,6 @@ class StoreUserProductRequest extends FormRequest
         return [
             'stock' => 'required|numeric',
             'best_before' => 'required|date',
-            //'userID' => 'required|numeric',
-            //'productID' => 'required|numeric',
             
         ];
     }

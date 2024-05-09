@@ -23,7 +23,7 @@ class UpdateInstanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //'user_productID' => 'required|numeric',
+         
             'stock' => 'required|max:255',
             'best_before' => 'required|date'
         ];
